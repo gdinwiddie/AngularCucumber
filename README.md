@@ -1,4 +1,10 @@
-# Zip
+# Angular and Protractor and Cucumber, Oh My!
+
+The purpose of this project is to explore the use of Angular, Protractor, and Cucumber together, deciding how I prefer to use them.
+It started with a plain Angular generated project (`ng new zip`) and I've explored from there.
+Perhaps this will help you jumpstart your use of Cucumber with Angular.
+Or, perhaps you'll notice I'm doing something dumb and let me know.
+Either outcome is a help to someone. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.6.
 
