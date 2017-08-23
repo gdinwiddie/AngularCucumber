@@ -26,8 +26,7 @@ defineSupportCode(function({Given, When, Then}) {
         zipcode_value.should.equal(zipcode);      // chai should syntax
       });
     }).catch(function(err) {
-      console.log('err: '+err);
-      callback(err);
+      logError(err);
     }).finally(function() {
       callback();
     });
@@ -37,13 +36,18 @@ defineSupportCode(function({Given, When, Then}) {
   Then('the system prompts the user for a valid zip code', function (callback) {
     browser.findElement(By.name('errors')).getText().then(function(errorText) {
         expect(errorText).to.contain("invalid ZIP Code");
+//        throw("pause");
     }).catch(function(err) {
-      console.log('err: '+err);
-      callback(err);
+      logError(err);
     }).finally(function() {
-      browser.sleep(2000).then(function() {
-        callback();
-      });
+      callback();
     });
   });
+
+  function logError(err) {
+    console.log('err: '+err);
+    browser.sleep(2000).then(function() {
+      callback(err);
+    });
+  }
 });
