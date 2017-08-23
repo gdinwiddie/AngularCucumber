@@ -1,12 +1,16 @@
 import { TestBed, async } from '@angular/core/testing';
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
+import { ZipFormComponent } from './zip-form.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        ZipFormComponent
       ],
     }).compileComponents();
   }));
