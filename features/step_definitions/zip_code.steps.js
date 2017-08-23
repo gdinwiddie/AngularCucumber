@@ -18,11 +18,9 @@ defineSupportCode(function({Given, When, Then}) {
       // TODO: Do we need a .then here?
       console.log('opened page');
       browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
-        console.log('found zipcode field');
         zipcode_field.sendKeys(zipcode);
       });
       browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
-        console.log('found zipcode value:' + zipcode_value);
         assert.equal(zipcode_value, zipcode);     // chai assert syntax
         expect(zipcode_value).to.equal(zipcode);  // chai expect syntax
         zipcode_value.should.equal(zipcode);      // chai should syntax
@@ -37,7 +35,15 @@ defineSupportCode(function({Given, When, Then}) {
 
 
   Then('the system prompts the user for a valid zip code', function (callback) {
-    // Write code here that turns the phrase above into concrete actions
-    callback(null, 'pending');
+    browser.findElement(By.name('errors')).getText().then(function(errorText) {
+        expect(errorText).to.contain("invalid ZIP Code");
+    }).catch(function(err) {
+      console.log('err: '+err);
+      callback(err);
+    }).finally(function() {
+      browser.sleep(2000).then(function() {
+        callback();
+      });
+    });
   });
 });
