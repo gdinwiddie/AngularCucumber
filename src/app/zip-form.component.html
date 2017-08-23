@@ -1,0 +1,23 @@
+<div name="form">
+  <form #form="ngForm" (ngSubmit)="onSubmit()">
+    <label for="zipcode">ZIP Code:</label>
+    <input name="zipcode" [(ngModel)]="model.zipcode" placeholder="Your ZIP code" />
+    <!--
+    <form-text
+      name="zipcode"
+      label="ZIP Code:"
+      placeholder="Enter a ZIP Code"
+      [(ngModel)]="model.zipcode"
+      >
+    </form-text>
+    -->
+    <br/>
+    Remove Me: zipcode is {{model.zipcode}} {{isValidZip()}}
+
+    <br/>
+    <button type="submit" >Submit</button>
+  </form>
+</div>
+<div name="errors" *ngIf="!isValidZip()">
+  <p>{{zipcode}} is an invalid ZIP Code
+</div>

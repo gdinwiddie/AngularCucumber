@@ -6,11 +6,15 @@ const should = require('chai').should();
 
 defineSupportCode(function({Given, When, Then}) {
 
-  Given('that {string} is an invalid zip code', function (string, callback) {
+  Given('that {string} is an invalid zip code', function (zipcode, callback) {
     // TODO: implement me
     callback();
   });
 
+  Given('that {string} is a valid zip code', function (zipcode, callback) {
+    // TODO: implement me
+    callback();
+  });
 
   When('the user provides a zip code of {string}', function (zipcode, callback) {
     // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
@@ -44,6 +48,22 @@ defineSupportCode(function({Given, When, Then}) {
       callback();
     });
   });
+
+  Then('the system does NOT prompt the user for a valid zip code', function (callback) {
+    browser.isElementPresent(By.name('errors')).then(function(present){
+      if (present) {
+        browser.findElement(By.name('errors')).getText().then(function(errorText) {
+          expect(errorText).to.not.contain("invalid ZIP Code");
+//        throw("pause");
+        })
+      }
+    }).catch(function(err) {
+      logError(err, callback);
+    }).finally(function() {
+      callback();
+    });
+  });
+
 
   function logError(err, callback) {
     console.log('err: '+err);
