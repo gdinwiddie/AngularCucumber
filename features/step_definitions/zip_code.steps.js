@@ -18,6 +18,7 @@ defineSupportCode(function({Given, When, Then}) {
       // TODO: Do we need a .then here?
       console.log('opened page');
       browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
+        zipcode_field.clear();
         zipcode_field.sendKeys(zipcode);
       });
       browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
@@ -26,7 +27,7 @@ defineSupportCode(function({Given, When, Then}) {
         zipcode_value.should.equal(zipcode);      // chai should syntax
       });
     }).catch(function(err) {
-      logError(err);
+      logError(err, callback);
     }).finally(function() {
       callback();
     });
@@ -38,13 +39,13 @@ defineSupportCode(function({Given, When, Then}) {
         expect(errorText).to.contain("invalid ZIP Code");
 //        throw("pause");
     }).catch(function(err) {
-      logError(err);
+      logError(err, callback);
     }).finally(function() {
       callback();
     });
   });
 
-  function logError(err) {
+  function logError(err, callback) {
     console.log('err: '+err);
     browser.sleep(2000).then(function() {
       callback(err);
