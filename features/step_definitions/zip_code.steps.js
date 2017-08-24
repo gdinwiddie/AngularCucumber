@@ -17,26 +17,38 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('the user provides a zip code of {string}', function (zipcode, callback) {
-    // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
-    browser.get('http://localhost:4200/').then(function() {
-      // TODO: Do we need a .then here?
-      console.log('opened page');
-      browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
-        zipcode_field.clear();
-        zipcode_field.sendKeys(zipcode);
-      });
-      browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
-        assert.equal(zipcode_value, zipcode);     // chai assert syntax
-        expect(zipcode_value).to.equal(zipcode);  // chai expect syntax
-        zipcode_value.should.equal(zipcode);      // chai should syntax
-      });
-    }).catch(function(err) {
+    open()
+    .then(enterZipCode(zipcode))
+    .then(assertZipCodeEquals(zipcode))
+    .catch(function(err) {
       logError(err, callback);
     }).finally(function() {
       callback();
     });
   });
 
+  function open() {
+    // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
+    return browser.get('http://localhost:4200/').then(function() {
+      console.log('opened page');
+    });
+  }
+
+  function enterZipCode(zipcode) {
+    return browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
+      zipcode_field.clear();
+      zipcode_field.sendKeys(zipcode);
+    });
+  }
+
+  function assertZipCodeEquals(zipcode) {
+    return browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
+      // Choose one of the three following patterns
+      assert.equal(zipcode_value, zipcode);     // chai assert syntax
+      expect(zipcode_value).to.equal(zipcode);  // chai expect syntax
+      zipcode_value.should.equal(zipcode);      // chai should syntax
+    });
+  }
 
   Then('the system prompts the user for a valid zip code', function (callback) {
     browser.findElement(By.name('errors')).getText().then(function(errorText) {
