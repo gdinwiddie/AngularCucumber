@@ -30,36 +30,6 @@ defineSupportCode(function({Given, When, Then}) {
     });
   });
 
-class ZipCodePage {
-  constructor(browser) {
-    this.browser = browser;
-  }
-
-  open() {
-    // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
-    return browser.get('http://localhost:4200/').then(function() {
-      console.log('opened page');
-    });
-  }
-
-  enterZipCode(zipcode) {
-    return browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
-      zipcode_field.clear();
-      zipcode_field.sendKeys(zipcode);
-    });
-  }
-
-  assertZipCodeEquals(zipcode) {
-    return browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
-      // Choose one of the three following patterns
-      assert.equal(zipcode_value, zipcode);     // chai assert syntax
-      expect(zipcode_value).to.equal(zipcode);  // chai expect syntax
-      zipcode_value.should.equal(zipcode);      // chai should syntax
-    });
-  }
-
-}
-
   Then('the system prompts the user for a valid zip code', function (callback) {
     browser.findElement(By.name('errors')).getText().then(function(errorText) {
         expect(errorText).to.contain("invalid ZIP Code");
