@@ -10,9 +10,7 @@ class ZipCodePage {
 
   open() {
     // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
-    return browser.get('http://localhost:4200/').then(function() {
-      console.log('opened page');
-    });
+    return browser.get('http://localhost:4200/');
   }
 
   enterZipCode(zipcode) {
