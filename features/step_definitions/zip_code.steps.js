@@ -1,4 +1,6 @@
 const {defineSupportCode} = require('cucumber');
+const ZipCodePage = require('../page_objects/zip_code_page');
+
 // for chai, see http://chaijs.com/guide/styles/
 const assert = require('chai').assert;
 const expect = require('chai').expect;
@@ -27,7 +29,7 @@ defineSupportCode(function({Given, When, Then}) {
       callback();
     });
   });
-  
+
 class ZipCodePage {
   constructor(browser) {
     this.browser = browser;
