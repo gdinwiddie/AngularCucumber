@@ -14,9 +14,18 @@ class ZipCodePage {
   }
 
   enterZipCode(zipcode) {
-    return browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
-      zipcode_field.clear();
-      zipcode_field.sendKeys(zipcode);
+    // TODO extract executeSequentially()
+    // per https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+    // "Advanced Mistake #3"
+    browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
+      var result = Promise.resolve();
+      [
+        zipcode_field.clear(),
+        zipcode_field.sendKeys(zipcode)
+      ].forEach(function (promiseFactory) {
+        result = result.then(promiseFactory);
+      });
+      return result;
     });
   }
 
@@ -28,6 +37,7 @@ class ZipCodePage {
       zipcode_value.should.equal(zipcode);      // chai should syntax
     });
   }
+
 
 };
 
