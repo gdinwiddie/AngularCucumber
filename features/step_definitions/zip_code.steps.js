@@ -17,31 +17,37 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('the user provides a zip code of {string}', function (zipcode, callback) {
-    open()
-    .then(enterZipCode(zipcode))
-    .then(assertZipCodeEquals(zipcode))
+    let page = new ZipCodePage(browser);
+    page.open()
+    .then(page.enterZipCode(zipcode))
+    .then(page.assertZipCodeEquals(zipcode))
     .catch(function(err) {
       logError(err, callback);
     }).finally(function() {
       callback();
     });
   });
+  
+class ZipCodePage {
+  constructor(browser) {
+    this.browser = browser;
+  }
 
-  function open() {
+  open() {
     // TODO: Why is '/' not sufficient? Why is baseURL being ignored?
     return browser.get('http://localhost:4200/').then(function() {
       console.log('opened page');
     });
   }
 
-  function enterZipCode(zipcode) {
+  enterZipCode(zipcode) {
     return browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
       zipcode_field.clear();
       zipcode_field.sendKeys(zipcode);
     });
   }
 
-  function assertZipCodeEquals(zipcode) {
+  assertZipCodeEquals(zipcode) {
     return browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
       // Choose one of the three following patterns
       assert.equal(zipcode_value, zipcode);     // chai assert syntax
@@ -49,6 +55,8 @@ defineSupportCode(function({Given, When, Then}) {
       zipcode_value.should.equal(zipcode);      // chai should syntax
     });
   }
+
+}
 
   Then('the system prompts the user for a valid zip code', function (callback) {
     browser.findElement(By.name('errors')).getText().then(function(errorText) {
