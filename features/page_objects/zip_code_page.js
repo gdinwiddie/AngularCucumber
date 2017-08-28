@@ -1,3 +1,4 @@
+const Page = require('./page');
 // for chai, see http://chaijs.com/guide/styles/
 const assert = require('chai').assert;
 const expect = require('chai').expect;
@@ -13,9 +14,9 @@ function executeSequentially(promiseFactories) {
   return result;
 }
 
-class ZipCodePage {
+class ZipCodePage extends Page {
   constructor(browser) {
-    this.browser = browser;
+    super(browser);
   }
 
   open() {
