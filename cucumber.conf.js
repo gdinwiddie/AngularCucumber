@@ -22,7 +22,10 @@ exports.config = {
 
   // See https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md for options available
   cucumberOpts: {
-    require: 'features/step_definitions/*.steps.js',
+    require: [
+//      'features/step_definitions/*.steps.js',
+      'features/**.js'
+    ],
 //    tags: false,
 //    name: false,
 //    format: 'summary',

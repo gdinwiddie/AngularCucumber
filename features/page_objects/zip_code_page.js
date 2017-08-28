@@ -4,16 +4,6 @@ const assert = require('chai').assert;
 const expect = require('chai').expect;
 const should = require('chai').should();
 
-// per https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
-// "Advanced Mistake #3"
-function executeSequentially(promiseFactories) {
-  var result = Promise.resolve();
-  promiseFactories.forEach(function (promiseFactory) {
-    result = result.then(promiseFactory);
-  });
-  return result;
-}
-
 class ZipCodePage extends Page {
   constructor(browser) {
     super(browser);
@@ -26,7 +16,7 @@ class ZipCodePage extends Page {
 
   enterZipCode(zipcode) {
     browser.findElement(By.name('zipcode')).then(function(zipcode_field) {
-      return executeSequentially(
+      return Page.executeSequentially(
         [
           zipcode_field.clear(),
           zipcode_field.sendKeys(zipcode)
