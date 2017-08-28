@@ -7,52 +7,31 @@ const expect = require('chai').expect;
 const should = require('chai').should();
 
 defineSupportCode(function({Given, When, Then}) {
-
-  Given('that {string} is an invalid zip code', function (zipcode, callback) {
-    // TODO: implement me
-    callback();
+  Given('that {string} is an invalid zip code', function (string) {
+    // TODO: tell backend that this is an invalid zip code
+//    return Promise.reject("Just to see it fail");
+    return Promise.resolve();
   });
 
-  Given('that {string} is a valid zip code', function (zipcode, callback) {
-    // TODO: implement me
-    callback();
+  Given('that {string} is a valid zip code', function (string) {
+    // TODO: tell backend that this is a valid zip code
+    return Promise.resolve();
   });
 
-  When('the user provides a zip code of {string}', function (zipcode, callback) {
+  When('the user provides a zip code of {string}', function (zipcode) {
     this.page = new ZipCodePage(browser);
-    this.page.open()
+    return this.page.open()
     .then(this.page.enterZipCode(zipcode))
     .then(this.page.assertZipCodeEquals(zipcode))
-    .catch(function(err) {
-      logError(err, callback);
-    }).finally(function() {
-      callback();
-    });
+    ;
   });
 
-  Then('the system prompts the user for a valid zip code', function (callback) {
-    this.page.promptsForValidZipCode()
-    .catch(function(err) {
-      logError(err, callback);
-    }).finally(function() {
-      callback();
-    });
+  Then('the system prompts the user for a valid zip code', function () {
+    return this.page.promptsForValidZipCode()
   });
 
-  Then('the system does NOT prompt the user for a valid zip code', function (callback) {
-    this.page.doesNotPromptForValidZipCode()
-    .catch(function(err) {
-      logError(err, callback);
-    }).finally(function() {
-      callback();
-    });
+  Then('the system does NOT prompt the user for a valid zip code', function () {
+    return this.page.doesNotPromptForValidZipCode()
   });
 
-
-  function logError(err, callback) {
-    console.log('err: '+err);
-    browser.sleep(2000).then(function() {
-      callback(err);
-    });
-  }
 });
