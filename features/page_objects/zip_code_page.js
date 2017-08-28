@@ -37,6 +37,22 @@ class ZipCodePage extends Page {
   }
 
 
+  promptsForValidZipCode() {
+    return browser.findElement(By.name('errors')).getText().then(function(errorText) {
+      expect(errorText).to.contain("invalid ZIP Code");
+    });
+  }
+
+  doesNotPromptForValidZipCode() {
+    // TODO: This may be returning the wrong promise.
+    return browser.isElementPresent(By.name('errors')).then(function(present){
+      if (present) {
+        browser.findElement(By.name('errors')).getText().then(function(errorText) {
+          expect(errorText).to.not.contain("invalid ZIP Code");
+        });
+      }
+    });
+  }
 };
 
 module.exports = ZipCodePage;

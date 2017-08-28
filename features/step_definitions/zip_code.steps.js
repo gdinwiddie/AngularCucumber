@@ -19,10 +19,10 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   When('the user provides a zip code of {string}', function (zipcode, callback) {
-    let page = new ZipCodePage(browser);
-    page.open()
-    .then(page.enterZipCode(zipcode))
-    .then(page.assertZipCodeEquals(zipcode))
+    this.page = new ZipCodePage(browser);
+    this.page.open()
+    .then(this.page.enterZipCode(zipcode))
+    .then(this.page.assertZipCodeEquals(zipcode))
     .catch(function(err) {
       logError(err, callback);
     }).finally(function() {
@@ -31,10 +31,8 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   Then('the system prompts the user for a valid zip code', function (callback) {
-    browser.findElement(By.name('errors')).getText().then(function(errorText) {
-        expect(errorText).to.contain("invalid ZIP Code");
-//        throw("pause");
-    }).catch(function(err) {
+    this.page.promptsForValidZipCode()
+    .catch(function(err) {
       logError(err, callback);
     }).finally(function() {
       callback();
@@ -42,14 +40,8 @@ defineSupportCode(function({Given, When, Then}) {
   });
 
   Then('the system does NOT prompt the user for a valid zip code', function (callback) {
-    browser.isElementPresent(By.name('errors')).then(function(present){
-      if (present) {
-        browser.findElement(By.name('errors')).getText().then(function(errorText) {
-          expect(errorText).to.not.contain("invalid ZIP Code");
-//        throw("pause");
-        })
-      }
-    }).catch(function(err) {
+    this.page.doesNotPromptForValidZipCode()
+    .catch(function(err) {
       logError(err, callback);
     }).finally(function() {
       callback();
