@@ -29,7 +29,8 @@ exports.config = {
     format: 'progress',
 //    format: 'progress-bar',
 //    format: 'json:cuke_output.json',
-//    format: 'node_modules/cucumber-pretty',   // see https://www.npmjs.com/package/cucumber-pretty
+// not ready    format: 'node_modules/cucumber-pretty',   // see https://www.npmjs.com/package/cucumber-pretty
+// errors    format: 'node_modules/cucumber-html-report',// see https://www.npmjs.com/package/cucumber-html-report
     profile: false,
     'no-source': true
   }

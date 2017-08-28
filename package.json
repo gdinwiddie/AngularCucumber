@@ -38,6 +38,7 @@
     "chai": "^4.1.1",
     "codelyzer": "~3.0.1",
     "cucumber": "^3.0.0",
+    "cucumber-html-report": "^0.6.1",
     "cucumber-pretty": "0.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
