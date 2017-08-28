@@ -20,11 +20,16 @@ exports.config = {
 
   baseURL: 'http://localhost:4200/',
 
+  // See https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md for options available
   cucumberOpts: {
     require: 'features/step_definitions/*.steps.js',
 //    tags: false,
 //    name: false,
-//    format: 'pretty',
+//    format: 'summary',
+    format: 'progress',
+//    format: 'progress-bar',
+//    format: 'json:cuke_output.json',
+//    format: 'node_modules/cucumber-pretty',   // see https://www.npmjs.com/package/cucumber-pretty
     profile: false,
     'no-source': true
   }

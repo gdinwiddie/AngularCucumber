@@ -8,7 +8,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cukes": "protractor cucumber.conf.js",
+    "wip": "protractor cucumber.conf.js --disableChecks --cucumberOpts.tag @wip",
+    "cukehelp": "node_modules//cucumber/bin/cucumber.js --help"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,7 @@
     "chai": "^4.1.1",
     "codelyzer": "~3.0.1",
     "cucumber": "^3.0.0",
+    "cucumber-pretty": "0.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
