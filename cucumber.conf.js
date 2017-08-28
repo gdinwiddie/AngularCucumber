@@ -31,6 +31,7 @@ exports.config = {
 //    format: 'json:cuke_output.json',
 // not ready    format: 'node_modules/cucumber-pretty',   // see https://www.npmjs.com/package/cucumber-pretty
 // errors    format: 'node_modules/cucumber-html-report',// see https://www.npmjs.com/package/cucumber-html-report
+// errors    format: 'node_modules/cucumber-html-reporter',  // https://www.npmjs.com/package/cucumber-html-reporter
     profile: false,
     'no-source': true
   }
