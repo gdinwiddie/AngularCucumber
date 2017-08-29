@@ -11,6 +11,8 @@
     "e2e": "ng e2e",
     "cukes": "protractor cucumber.conf.js",
     "wip": "protractor cucumber.conf.js --disableChecks --cucumberOpts.tag @wip",
+    "cukesByTag": "protractor cucumber.conf.js --disableChecks --cucumberOpts.tag",
+    "cukesByName": "protractor cucumber.conf.js --disableChecks --cucumberOpts.name",
     "generate_snippets": "node_modules//cucumber/bin/cucumber.js --format snippets --format-options '{\"snippetInterface\": \"<interface>\"}'",
     "cukehelp": "node_modules//cucumber/bin/cucumber.js --help"
   },
