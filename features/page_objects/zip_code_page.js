@@ -25,7 +25,7 @@ class ZipCodePage extends Page {
     });
   }
 
-  assertZipCodeEquals(zipcode) {
+  assertZipCodeEquals1(zipcode) {
     browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
       return Promise.all([
         // Choose one of the three following patterns
@@ -33,6 +33,12 @@ class ZipCodePage extends Page {
         expect(zipcode_value).to.equal(zipcode),  // chai expect syntax
         zipcode_value.should.equal(zipcode)       // chai should syntax
       ]);
+    });
+  }
+
+  assertZipCodeEquals(zipcode) {
+    return browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
+       assert.equal(zipcode_value, zipcode);
     });
   }
 
