@@ -1,10 +1,14 @@
 <div name="form">
   <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <label for="zipcode">ZIP Code:</label>
-    <input name="zipcode" [(ngModel)]="model.zipcode" placeholder="Your ZIP code" />
+    <label for="zipcode_field">ZIP Code:</label>
+    <input name="zipcode" id="zipcode_field"
+           [(ngModel)]="model.zipcode"
+           placeholder="Enter a ZIP code" />
     <!--
+    TODO: Why doesn't this form-text tag work?
     <form-text
       name="zipcode"
+      id="zipcode_field"
       label="ZIP Code:"
       placeholder="Enter a ZIP Code"
       [(ngModel)]="model.zipcode"
@@ -12,7 +16,7 @@
     </form-text>
     -->
     <br/>
-    Remove Me: zipcode is {{model.zipcode}} {{isValidZip()}}
+    Remove Me: zipcode {{model.zipcode}} isValid= {{isValidZip()}}
 
     <br/>
     <button type="submit" >Submit</button>
