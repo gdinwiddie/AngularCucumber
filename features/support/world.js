@@ -12,7 +12,7 @@ function CustomWorld() {
     return result;
   }
 
-  promise.USE_PROMISE_MANAGER = false;
+//  promise.USE_PROMISE_MANAGER = false;
 //  console.log("Not using Promise Manager, see https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs#step-1-disabling-the-promise-manager");
 }
 
