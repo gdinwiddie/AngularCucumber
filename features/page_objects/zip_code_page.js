@@ -25,7 +25,7 @@ class ZipCodePage extends Page {
     });
   }
 
-  assertZipCodeEquals1(zipcode) {
+  assertZipCodeEquals_alternate(zipcode) {
     browser.findElement(By.name('zipcode')).getAttribute('value').then(function(zipcode_value) {
       return Promise.all([
         // Choose one of the three following patterns
