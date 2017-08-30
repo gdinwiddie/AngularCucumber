@@ -1,16 +1,24 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Directive } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { ZipLookupService } from './zip.service';
+
+@Directive({
+  selector: "zip-form",
+  exportAs: "zipForm"
+})
 
 @Component({
   selector: 'zip-form',
   templateUrl: './zip-form.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [ ZipLookupService ]
+  providers: [ ZipLookupService ],
 })
+
 export class ZipFormComponent {
   constructor(private zipLookupService: ZipLookupService) {
   }
-  zipcode = '';
+  zipcode = '-----';
 
   model = this;
 

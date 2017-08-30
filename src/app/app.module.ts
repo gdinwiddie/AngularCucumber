@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ZipFormComponent } from './zip-form.component';
+import { ZipLookupService } from './zip.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,7 @@ import { ZipFormComponent } from './zip-form.component';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ ZipLookupService ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

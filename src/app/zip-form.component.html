@@ -1,5 +1,5 @@
-<div name="form">
-  <form #form="ngForm" (ngSubmit)="onSubmit()">
+<div name="zip_input_form">
+  <form #form="zipForm" (ngSubmit)="onSubmit()">
     <label for="zipcode_field">ZIP Code:</label>
     <input name="zipcode" id="zipcode_field"
            [(ngModel)]="model.zipcode"
